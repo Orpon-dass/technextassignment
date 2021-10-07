@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React,{useState,useEffect} from "react";
+import Blueprint from "./component/Blueprint";
+import Navbar from "./component/Navbar";
 function App() {
+  const [apiData,setApiData] = useState([])
+  //fetch api
+  const fetchData = async ()=>{
+       let data = await fetch("https://api.spacexdata.com/v3/launches");
+       let apiResult = await data.json();
+       setApiData(apiResult);
+  }
+useEffect(() => {
+  fetchData();
+}, []);
+console.log(apiData);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Navbar />
+    <Blueprint apiData={apiData} />
+    </>
   );
 }
 
