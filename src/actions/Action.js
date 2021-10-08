@@ -4,3 +4,15 @@ export const setapidata =(value)=>{
         payload:value
     }
 }
+export const isBottom = (val)=>{
+    return{
+        type:"BOTTOM_VALUE",
+        bottomVal:val
+    }
+}
+export const searchAction = (value)=>{
+    return{
+        type:"SEARCH",
+        searchVal:value
+    }
+}

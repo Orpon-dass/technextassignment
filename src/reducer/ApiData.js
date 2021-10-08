@@ -6,4 +6,18 @@ const api_data = (state = [], action) =>{
     }
 }
 
+export const bottomfun = (state=false,action)=>{
+   if(action.type === "BOTTOM_VALUE"){
+       return action.bottomVal;
+   }else{
+       return state;
+   }
+}
+export const searchFun = (state="",action)=>{
+    if(action.type==="SEARCH"){
+      return action.searchVal;
+    }else{
+        return state;
+    }
+}
 export default api_data;

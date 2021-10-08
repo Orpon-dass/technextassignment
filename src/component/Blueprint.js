@@ -2,7 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 export default function Blueprint() {
     //redux code
-    const apiData = useSelector((state)=> state.api_data)
+    const apiData = useSelector((state)=> state.api_data);
+    const bottom = useSelector((state)=> state.bottomfun);
     return (
         <div className="container-fluid">
              <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4" >
@@ -11,7 +12,7 @@ export default function Blueprint() {
             
                  <div key={data.flight_number} className="col mt-3 mb-3 d-flex justify-content-center">
                         <div className="card" style={{"width": "19rem"}}>
-                            <div className="text-center">
+                            <div className="text-center mt-2">
                               <img src={data.links.mission_patch} className="card-img-top" style={{width:"170px"}} alt="..." />
                             </div>
                             
@@ -24,7 +25,7 @@ export default function Blueprint() {
                             </div>
 
                             <ul className="list-group list-group-flush">
-                                <li className="list-group-item">Rocket Name : {data.rocket.rocket_name} 1</li>
+                                <li className="list-group-item">Rocket Name : {data.rocket.rocket_name}</li>
                                 <li className="list-group-item">Customers : {data.rocket.second_stage.payloads[0].customers[0]} </li>
                                 <li className="list-group-item">Nationality : {data.rocket.second_stage.payloads[0].nationality}</li>
                             </ul>
@@ -41,6 +42,13 @@ export default function Blueprint() {
                  )}
 
              </div>
+            { bottom && 
+            <div className="row"> 
+                 <div className="col">
+                    <h5 className="text-center">No more post</h5>
+                 </div>
+             </div>
+             }
         </div>
     )
 }
