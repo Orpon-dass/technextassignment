@@ -15,7 +15,7 @@ export default function Blueprint() {
                             key={data.flight_number}
                             className="col mt-3 mb-3 d-flex justify-content-center"
                         >
-                            <div className="card" style={{ width: '19rem' }}>
+                            <div className="card shadow" style={{ width: '19rem' }}>
                                 <div className="text-center mt-2">
                                     <img
                                         src={
