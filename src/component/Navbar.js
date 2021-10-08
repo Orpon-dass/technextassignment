@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {searchAction} from '../actions/Action'
-export default function Navbar() {
+export default function Navbar({lastYearData,lastMonthData}) {
     const dispatch = useDispatch();
     const searchHandler = (e)=>{
           dispatch(searchAction(e.target.value))
@@ -21,9 +21,9 @@ export default function Navbar() {
                             Filter
                         </span>
                         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><span className="dropdown-item" >Last Week</span></li>
-                            <li><span className="dropdown-item" >Last Month</span></li>
-                            <li><span className="dropdown-item" >Last Year</span></li>
+                            <li><span className="dropdown-item" style={{cursor:"pointer"}} >Last Week</span></li>
+                            <li><span className="dropdown-item" onClick={lastMonthData} style={{cursor:"pointer"}} >Last Month</span></li>
+                            <li><span className="dropdown-item" onClick={lastYearData} style={{cursor:"pointer"}} >Last Year</span></li>
                         </ul>
                     </li>
                 </ul>

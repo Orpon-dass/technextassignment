@@ -44,7 +44,7 @@ useEffect(() => {
       setPagedata((pagedata)=>[...pagedata,...perPageData])
       dispatch(setapidata(pagedata))
     }
-    if(page===14){
+    if(page===15){
       dispatch(isBottom(true));
     }
      
@@ -55,19 +55,43 @@ const searchvalue= useSelector((state)=>state.searchFun);
 useEffect(() => {
   const searchByRocketName = (search_value)=>{
     const finalSearchValuev = apiData.filter((data)=>{
-          if(data.rocket.rocket_name.toString().toLowerCase().includes(search_value.toString().toLowerCase())){
-            return data;
-          }
+         return data.rocket.rocket_name.toString().toLowerCase().includes(search_value.toString().toLowerCase())  
     });
     dispatch(setapidata(finalSearchValuev))
-   console.log(finalSearchValuev)
   }
   searchByRocketName(searchvalue)
 }, [searchvalue])
+// getting last year data
+const lastYearData = ()=>{
+  const current_date = new Date();
+  const d=current_date.getFullYear()-1;
+  const getlastyeardata = apiData.filter((data)=>{
+         return data.launch_year===d.toString()
+  });
+  dispatch(setapidata(getlastyeardata))
+}
+const lastMonthData =()=>{
+  const current_date = new Date();
+  const cmonth =current_date.getMonth();
+  const cdate =current_date.getDate();
+  const cyear =current_date.getFullYear();
+  const cfulldate = `${cyear}-${cmonth-1}-${cdate}`;
+  const getlastMothdata = apiData.filter((val)=>{
+  const lanchdate= new Date(val.launch_date_local)
+  const lmonth =lanchdate.getMonth();
+  const ldate =lanchdate.getDate();
+  const lyear =lanchdate.getFullYear();
+  const lfulldate= `${lyear}-${lmonth}-${ldate}`;
+    // console.log(lfulldate)
+    return lfulldate.toString()===cfulldate.toString()
+  });
+  //console.log(getlastMothdata);
+  dispatch(setapidata(getlastMothdata))
 
+}
   return (
     <>
-    <Navbar />
+    <Navbar lastYearData={lastYearData} lastMonthData={lastMonthData} />
     <Blueprint />
     </>
   );
