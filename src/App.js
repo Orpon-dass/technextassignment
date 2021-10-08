@@ -86,12 +86,46 @@ const lastMonthData =()=>{
     return lfulldate.toString()===cfulldate.toString()
   });
   //console.log(getlastMothdata);
-  dispatch(setapidata(getlastMothdata))
+  dispatch(setapidata(getlastMothdata));
+}
+
+//get last week data
+function getWeekNumber(d) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+  return [d.getUTCFullYear(), weekNo];
+}
+// console.log(`week ${weeknum[1]} year ${weeknum[0]} `)
+const lastweekData =()=>{
+  const current_weeknum = getWeekNumber(new Date());
+
+  const getLastWeekData = apiData.filter((result)=>{
+  const lanchdate= new Date(result.launch_date_local)
+  const lmonth =lanchdate.getMonth();
+  const ldate =lanchdate.getDate();
+  const lyear =lanchdate.getFullYear();
+  const lfulldate= `${lyear}-${lmonth}-${ldate}`;
+  const apiWeekNum =getWeekNumber(new Date(lfulldate));
+    return apiWeekNum[1]===current_weeknum -1 && apiWeekNum[0]===current_weeknum[0]
+  //console.log(` api week ${apiWeekNum[1]} api year ${apiWeekNum[0]} `)
+  });
+  //console.log(getLastWeekData);
+  dispatch(setapidata(getLastWeekData));
+
+}
+const isUpcoming =()=>{
+  const getIsupComingData = apiData.filter((upcomingData)=>{
+     return upcomingData.upcoming===true;
+  });
+  //console.log(getIsupComingData);
+  dispatch(setapidata(getIsupComingData));
 
 }
   return (
     <>
-    <Navbar lastYearData={lastYearData} lastMonthData={lastMonthData} />
+    <Navbar isUpcoming={isUpcoming} lastYearData={lastYearData} lastMonthData={lastMonthData} lastweekData={lastweekData}/>
     <Blueprint />
     </>
   );
