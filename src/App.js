@@ -100,7 +100,6 @@ function getWeekNumber(d) {
 // console.log(`week ${weeknum[1]} year ${weeknum[0]} `)
 const lastweekData =()=>{
   const current_weeknum = getWeekNumber(new Date());
-
   const getLastWeekData = apiData.filter((result)=>{
   const lanchdate= new Date(result.launch_date_local)
   const lmonth =lanchdate.getMonth();
@@ -121,11 +120,23 @@ const isUpcoming =()=>{
   });
   //console.log(getIsupComingData);
   dispatch(setapidata(getIsupComingData));
-
+}
+//get seccessful mission  data
+const successfulMission = ()=>{
+  const getSuccessfulMissionData = apiData.filter((succeesdata)=>{
+      return succeesdata.launch_success===true;
+  });
+  dispatch(setapidata(getSuccessfulMissionData));
 }
   return (
     <>
-    <Navbar fetchData={fetchData} isUpcoming={isUpcoming} lastYearData={lastYearData} lastMonthData={lastMonthData} lastweekData={lastweekData}/>
+    <Navbar
+     successfulMission={successfulMission}
+     fetchData={fetchData}
+     isUpcoming={isUpcoming} 
+     lastYearData={lastYearData} 
+     lastMonthData={lastMonthData} 
+     lastweekData={lastweekData}/>
     <Blueprint />
     </>
   );
