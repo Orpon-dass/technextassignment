@@ -128,9 +128,16 @@ const successfulMission = ()=>{
   });
   dispatch(setapidata(getSuccessfulMissionData));
 }
+const failMission = ()=>{
+  const getfailMissionData = apiData.filter((succeesdata)=>{
+      return succeesdata.launch_success===false;
+  });
+  dispatch(setapidata(getfailMissionData));
+}
   return (
     <>
     <Navbar
+    failMission={failMission}
      successfulMission={successfulMission}
      fetchData={fetchData}
      isUpcoming={isUpcoming} 

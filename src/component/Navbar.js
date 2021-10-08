@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {searchAction} from '../actions/Action'
-export default function Navbar({lastYearData,lastMonthData,lastweekData,isUpcoming,fetchData,successfulMission}) {
+export default function Navbar({lastYearData,lastMonthData,lastweekData,isUpcoming,fetchData,successfulMission,failMission}) {
     const dispatch = useDispatch();
     const searchHandler = (e)=>{
           dispatch(searchAction(e.target.value))
@@ -26,7 +26,7 @@ export default function Navbar({lastYearData,lastMonthData,lastweekData,isUpcomi
                             <li><span className="dropdown-item" onClick={lastYearData} style={{cursor:"pointer"}} >Last Year</span></li>
                             <li><span className="dropdown-item" onClick={isUpcoming} style={{cursor:"pointer"}} >Is Upcoming</span></li>
                             <li><span className="dropdown-item" onClick={successfulMission} style={{cursor:"pointer"}} >Successful mission</span></li>
-                            <li><span className="dropdown-item" onClick={isUpcoming} style={{cursor:"pointer"}} >Fail Mission</span></li>
+                            <li><span className="dropdown-item" onClick={failMission} style={{cursor:"pointer"}} >Fail Mission</span></li>
                         </ul>
                     </li>
                 </ul>
