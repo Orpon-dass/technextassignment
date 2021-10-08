@@ -1,7 +1,7 @@
 import React from 'react'
 import {useDispatch} from 'react-redux'
 import {searchAction} from '../actions/Action'
-export default function Navbar({lastYearData,lastMonthData,lastweekData,isUpcoming}) {
+export default function Navbar({lastYearData,lastMonthData,lastweekData,isUpcoming,fetchData}) {
     const dispatch = useDispatch();
     const searchHandler = (e)=>{
           dispatch(searchAction(e.target.value))
@@ -10,7 +10,7 @@ export default function Navbar({lastYearData,lastMonthData,lastweekData,isUpcomi
         <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
-                <span className="navbar-brand">Navbar</span>
+                <span onClick={fetchData} className="navbar-brand" style={{cursor:"pointer"}}>SpaceX launches</span>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
                 </button>

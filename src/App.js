@@ -10,7 +10,6 @@ function App() {
   //redux code
   const dispatch =useDispatch();
   //fetch api
-useEffect(() => {
   const fetchData = async ()=>{
     let data = await fetch("https://api.spacexdata.com/v3/launches");
     let apiResult = await data.json();
@@ -18,6 +17,7 @@ useEffect(() => {
      dispatch(setapidata(apiResult.slice(0,8)))
 
 }
+useEffect(() => {
   fetchData();
 }, []);
 
@@ -125,7 +125,7 @@ const isUpcoming =()=>{
 }
   return (
     <>
-    <Navbar isUpcoming={isUpcoming} lastYearData={lastYearData} lastMonthData={lastMonthData} lastweekData={lastweekData}/>
+    <Navbar fetchData={fetchData} isUpcoming={isUpcoming} lastYearData={lastYearData} lastMonthData={lastMonthData} lastweekData={lastweekData}/>
     <Blueprint />
     </>
   );

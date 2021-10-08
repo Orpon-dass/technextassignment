@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import rocketImage from '../image/Rocket.jpg'
 export default function Blueprint() {
     //redux code
     const apiData = useSelector((state)=> state.api_data);
@@ -14,14 +15,14 @@ export default function Blueprint() {
                  <div key={data.flight_number} className="col mt-3 mb-3 d-flex justify-content-center">
                         <div className="card" style={{"width": "19rem"}}>
                             <div className="text-center mt-2">
-                              <img src={data.links.mission_patch} className="card-img-top" style={{width:"170px"}} alt="..." />
+                              <img src={data.links.mission_patch=== null ? rocketImage : data.links.mission_patch} className="card-img-top" style={{width:"170px"}} alt="..." />
                             </div>
                             
 
                             <div className="card-body">
                                 <h5 className="card-title">{data.mission_name}</h5>
                                 <p className="card-text">{data.details!==null ? data.details.slice(0,100) : "details not available" }
-                                <a href={data.links.article_link} className="card-link ms-1">See Details</a>
+                                <a href={data.links.article_link} className={data.details===null ? "card-link ms-1 btn disabled":"card-link ms-1"}>See Details</a>
                                 </p>
                             </div>
 
@@ -56,7 +57,7 @@ export default function Blueprint() {
               {apiData.length===0 && 
             <div className="row"> 
                  <div className="col">
-                    <h5 className="text-center">Nothing found</h5>
+                    <h5 className="text-center mt-4">Nothing found</h5>
                  </div>
              </div>
              }
