@@ -35,7 +35,7 @@ Please follow the below instructions to run this project in your computer:
 
 ## Demo
 
-[AppLink](https://spacexlaunche.netlify.app/)
+[AppLink](https://spacexlanuch.netlify.app/)
 
 ## Please notice
 
