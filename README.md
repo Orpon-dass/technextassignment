@@ -11,6 +11,12 @@ This app is about space x launches information, their mission, success, failure.
   - React
   - Bootstrap
 
+  ## Features
+
+- Search by rocket name
+- Filter by year,month,lastweek,success,failure
+- Responsive
+
 ## How to run
 
 Please follow the below instructions to run this project in your computer:
