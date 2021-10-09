@@ -8,6 +8,7 @@ function App() {
     const [apiData, setApiData] = useState([]);
     const [page, setpage] = useState(1);
     const [pagedata, setPagedata] = useState([]);
+    const [isPageActive, setIsPageActive] = useState(true);
     // redux code
     const dispatch = useDispatch();
     // fetch api
@@ -17,6 +18,7 @@ function App() {
         setApiData(apiResult);
         dispatch(setapidata(apiResult.slice(0, 8)));
         setPagedata(apiResult.slice(0, 8));
+        setIsPageActive(true);
     };
     useEffect(() => {
         fetchData();
@@ -25,9 +27,11 @@ function App() {
     useEffect(() => {
         function handleScroll() {
             const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
-            const ScTopCliheight = Math.round(scrollTop + clientHeight + 2);
-            if (ScTopCliheight >= scrollHeight) {
-                setpage(page + 1);
+            const ScTopCliheight = Math.round(scrollTop + clientHeight);
+            if (ScTopCliheight === scrollHeight) {
+                if (isPageActive) {
+                    setpage(page + 1);
+                }
             }
         }
         window.addEventListener('scroll', handleScroll);
@@ -69,6 +73,7 @@ function App() {
         const d = currentDate.getFullYear() - 1;
         const getlastyeardata = apiData.filter((data) => data.launch_year === d.toString());
         dispatch(setapidata(getlastyeardata));
+        setIsPageActive(false);
     };
     const lastMonthData = () => {
         const currentDate = new Date();
@@ -85,6 +90,7 @@ function App() {
             // console.log(lfulldate)
             return lfulldate.toString() === cfulldate.toString();
         });
+        setIsPageActive(false);
         // console.log(getlastMothdata);
         dispatch(setapidata(getlastMothdata));
     };
@@ -111,6 +117,7 @@ function App() {
             // console.log(` api week ${apiWeekNum[1]} api year ${apiWeekNum[0]} `)
         });
         // console.log(getLastWeekData);
+        setIsPageActive(false);
         dispatch(setapidata(getLastWeekData));
     };
     const isUpcoming = () => {
@@ -118,6 +125,7 @@ function App() {
             (upcomingData) => upcomingData.upcoming === true && upcomingData.launch_success === null
         );
         // console.log(getIsupComingData);
+        setIsPageActive(false);
         dispatch(setapidata(getIsupComingData));
     };
     // get seccessful mission  data
@@ -126,6 +134,7 @@ function App() {
             (succeesdata) => succeesdata.launch_success === true && succeesdata !== null
         );
         dispatch(setapidata(getSuccessfulMissionData));
+        setIsPageActive(false);
     };
     // get fail mission data
     const failMission = () => {
@@ -133,6 +142,7 @@ function App() {
             (faildata) => faildata.launch_success === false && faildata.launch_success !== null
         );
         dispatch(setapidata(getfailMissionData));
+        setIsPageActive(false);
     };
     return (
         <>
