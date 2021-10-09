@@ -4,7 +4,7 @@ import rocketImage from '../image/Rocket.jpg';
 
 export default function Blueprint() {
     // redux code
-    const apiData = useSelector((state) => state.api_data);
+    const apiData = useSelector((state) => state.apidata);
     const bottom = useSelector((state) => state.bottomfun);
     return (
         <div className="container-fluid">

@@ -1,12 +1,9 @@
-import { combineReducers } from "redux";
-import api_data from "../reducer/ApiData"
-import {bottomfun,searchFun} from "../reducer/ApiData"
+import { combineReducers } from 'redux';
+import apidata, { bottomfun, searchFun } from './ApiData';
 
-const reducer = combineReducers(
-    {
-        api_data,
-        bottomfun,
-        searchFun
-    }
-);
+const reducer = combineReducers({
+    apidata,
+    bottomfun,
+    searchFun,
+});
 export default reducer;
