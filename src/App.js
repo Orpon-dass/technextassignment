@@ -14,13 +14,13 @@ function App() {
     const fetchData = async () => {
         const data = await fetch('https://api.spacexdata.com/v3/launches');
         const apiResult = await data.json();
-        setApiData((apiData) => [...apiData, ...apiResult]);
+        setApiData(apiResult);
         dispatch(setapidata(apiResult.slice(0, 8)));
+        setPagedata(apiResult.slice(0, 8));
     };
     useEffect(() => {
         fetchData();
     }, []);
-
     // set page number
     useEffect(() => {
         function handleScroll() {
@@ -40,11 +40,11 @@ function App() {
         const startIndex = (page - 1) * limit;
         const endEndex = page * limit;
         const perPageData = apiData.slice(startIndex, endEndex);
-        if (page < 15) {
+        if (page < 16) {
             setPagedata((pagedata) => [...pagedata, ...perPageData]);
             dispatch(setapidata(pagedata));
         }
-        if (page === 15) {
+        if (page === 16) {
             dispatch(isBottom(true));
         }
     }, [page]);
@@ -77,7 +77,7 @@ function App() {
         const cyear = currentDate.getFullYear();
         const cfulldate = `${cyear}-${cmonth - 1}-${cdate}`;
         const getlastMothdata = apiData.filter((val) => {
-            const lanchdate = new Date(val.launch_date_local);
+            const lanchdate = new Date(val.launch_date_utc);
             const lmonth = lanchdate.getMonth();
             const ldate = lanchdate.getDate();
             const lyear = lanchdate.getFullYear();
@@ -114,20 +114,24 @@ function App() {
         dispatch(setapidata(getLastWeekData));
     };
     const isUpcoming = () => {
-        const getIsupComingData = apiData.filter((upcomingData) => upcomingData.upcoming === true);
+        const getIsupComingData = apiData.filter(
+            (upcomingData) => upcomingData.upcoming === true && upcomingData.launch_success === null
+        );
         // console.log(getIsupComingData);
         dispatch(setapidata(getIsupComingData));
     };
     // get seccessful mission  data
     const successfulMission = () => {
         const getSuccessfulMissionData = apiData.filter(
-            (succeesdata) => succeesdata.launch_success === true
+            (succeesdata) => succeesdata.launch_success === true && succeesdata !== null
         );
         dispatch(setapidata(getSuccessfulMissionData));
     };
     // get fail mission data
     const failMission = () => {
-        const getfailMissionData = apiData.filter((faildata) => faildata.launch_success === false);
+        const getfailMissionData = apiData.filter(
+            (faildata) => faildata.launch_success === false && faildata.launch_success !== null
+        );
         dispatch(setapidata(getfailMissionData));
     };
     return (

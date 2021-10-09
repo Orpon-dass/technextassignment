@@ -4,15 +4,16 @@ import rocketImage from '../image/Rocket.jpg';
 
 export default function Blueprint() {
     // redux code
-    const apiData = useSelector((state) => state.apidata);
+    const apiDataStoredata = useSelector((state) => state.apidata);
+    const apiDataStore = [...new Set(apiDataStoredata)];
     const bottom = useSelector((state) => state.bottomfun);
     return (
         <div className="container-fluid">
-            {apiData.length !== 0 && (
+            {apiDataStore.length !== 0 && (
                 <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4">
-                    {apiData.map((data) => (
+                    {apiDataStore.map((data) => (
                         <div
-                            key={data.flight_number}
+                            key={data.mission_name}
                             className="col mt-3 mb-3 d-flex justify-content-center"
                         >
                             <div className="card shadow" style={{ width: '19rem' }}>
@@ -60,16 +61,21 @@ export default function Blueprint() {
                                         Nationality :{' '}
                                         {data.rocket.second_stage.payloads[0].nationality}
                                     </li>
-                                    <li
-                                        className={
-                                            data.launch_success === false
-                                                ? 'list-group-item bg-danger'
-                                                : 'list-group-item bg-success'
-                                        }
-                                    >
-                                        Mission :{' '}
-                                        {data.launch_success === false ? 'Fail' : 'Successful'}
-                                    </li>
+                                    {data.launch_success === false && (
+                                        <li className="list-group-item bg-danger">
+                                            Mission : {data.launch_success === false && 'Fail'}
+                                        </li>
+                                    )}
+                                    {data.launch_success === true && (
+                                        <li className="list-group-item bg-success">
+                                            Mission : {data.launch_success === true && 'Successful'}
+                                        </li>
+                                    )}
+                                    {data.launch_success === null && (
+                                        <li className="list-group-item bg-warning">
+                                            Mission : {data.launch_success === null && 'Pending'}
+                                        </li>
+                                    )}
                                 </ul>
                                 <a href={data.links.video_link}>
                                     <div className="d-grid gap-2 m-2">
@@ -96,7 +102,7 @@ export default function Blueprint() {
                     </div>
                 </div>
             )}
-            {apiData.length === 0 && (
+            {apiDataStore.length === 0 && (
                 <div className="row">
                     <div className="col">
                         <h5 className="text-center mt-4">Nothing found</h5>
