@@ -127,9 +127,7 @@ function App() {
     };
     // get fail mission data
     const failMission = () => {
-        const getfailMissionData = apiData.filter(
-            (succeesdata) => succeesdata.launch_success === false
-        );
+        const getfailMissionData = apiData.filter((faildata) => faildata.launch_success === false);
         dispatch(setapidata(getfailMissionData));
     };
     return (

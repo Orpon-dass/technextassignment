@@ -37,6 +37,6 @@ Please follow the below instructions to run this project in your computer:
 
 [AppLink](https://tender-yalow-9f784e.netlify.app/)
 
-## please notice
+## Please notice
 
 Make sure in your VS Code Editor, "LF" is selected as line feed instead of CRLF (Carriage return and line feed). To do that, just click LF/CRLF in bottom right corner of editor, click it and change it to "LF". If you dont do that, you will get errors in my setup.
