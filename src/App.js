@@ -28,7 +28,8 @@ function App() {
         function handleScroll() {
             const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
             const ScTopCliheight = Math.round(scrollTop + clientHeight);
-            if (ScTopCliheight === scrollHeight) {
+            //  console.log(`scroll top client height${ScTopCliheight} scroll height :${scrollHeight}`);
+            if (ScTopCliheight >= scrollHeight) {
                 if (isPageActive) {
                     setpage(page + 1);
                 }
@@ -39,6 +40,7 @@ function App() {
             window.removeEventListener('scroll', handleScroll);
         };
     });
+    // console.log(page);
     useEffect(() => {
         const limit = 8;
         const startIndex = (page - 1) * limit;
