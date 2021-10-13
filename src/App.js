@@ -29,7 +29,7 @@ function App() {
             const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
             const ScTopCliheight = Math.round(scrollTop + clientHeight);
             //  console.log(`scroll top client height${ScTopCliheight} scroll height :${scrollHeight}`);
-            if (ScTopCliheight >= scrollHeight) {
+            if (ScTopCliheight >= scrollHeight - 250) {
                 if (isPageActive) {
                     setpage(page + 1);
                 }
